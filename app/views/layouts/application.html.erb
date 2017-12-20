@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Managment App</title>
+    <%= csrf_meta_tags %>    
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- Navbar global -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      
+      <!-- Brand -->
+      <a class="navbar-brand" href="<%= courses_url %>">
+          <i class="fa fa-diamond"></i> | Managment App
+      </a>
+    
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+     
+      <% if user_signed_in? %>
+        <ul class="navbar-nav">
+          
+          <li class="nav-item">
+          <!-- considerar clase para a solamente "btn btn-lg btn-social btn-github" -->
+            <a class="nav-link" href="<%= courses_url %>">
+                <i class="fa fa-list-alt"></i> Courses
+            </a>
+          </li>
+        
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+              <span>
+                <i class="fa fa-external-link"></i>
+                Log out
+              </span>
+            <% end %>
+          </li>
+          
+          <li class="nav-item">
+            <%= link_to edit_user_registration_path, class: 'nav-link' do %>
+              <span>
+                <i class="fa fa-pencil-square-o"></i>
+                Edit account
+              </span>
+            <% end %>
+          </li>
+                  
+        </ul>
+    <% end %>
+    
+    </div>
+    </nav> 
+
+    <!-- Mensajes de error/notificacion desde devise -->    
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
+    <div class="row">
+      <div class="container beyond-navbar">
+        <%= yield %>
+      </div>
+    </div>
+
+    <br>
+    
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">TTPS-Ruby final project, by Camila Onofri | <%= Time.now.year %> </span>
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,89 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* for bootstrap */
+@import "bootstrap";
+
+/* for getting icons */
+@import "font-awesome";
+
+/* for scrolling */
+body{
+overflow-y: scroll;
+overflow-x: hidden;
+}
+
+/* Sticky footer styles ------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+/* style for links*/
+a{
+  outline: none!important;
+}
+
+/* for all main containers */
+.beyond-navbar{
+  margin-top: 30px;
+}
+
+/* ruby icon */
+.ruby-img{
+  width: 100px ;
+  margin-right: -25px;
+}
+  
+/* cards */
+.table{
+  text-align: left;
+}
+
+/* summary icons */
+#passed{
+  color: green;
+}
+#fail{
+  color: orangered;
+}
+#absent{
+  color: gray;
+}
+#fail, #passed{
+  font-weight: bolder;
+}
+
+/* tfoot */
+.tfoot-dark{
+  color: #000;
+  background-color: #eee;
+  border-color: #32383e;
+}
+
+.bordered{
+  border-top: 2px solid black;
+}

@@ -1,0 +1,79 @@
+
+<div class="container col-md-8 col-md-offset-2 ">
+  <h1> <%= @course.year %> Course Summary</h1>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Students</th>
+        <% @exams = @course.exams.order('date') %>
+        <% @exams.each do |exam| %>
+             <th><%= exam.title %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @course.students.order('surname, name').each do |student| %>
+        <tr>
+          <td><%= student.surname %> <%= student.name %></td>
+          <% @exams.each do |exam| %>
+            <td>
+                <% if student.attended_to? exam  %>
+                    <% result = student.score_for exam %>
+                    <% if result.passed?  %>
+                      <span id="passed">
+                        <%= result.score %> %
+                        <i class="fa fa-check-circle-o"></i> 
+                      <span>
+                    <% else %>
+                      <span id="fail"> 
+                        <%= result.score %> %
+                        <i class="fa fa-times-circle-o"></i> 
+                      <span>
+                    <% end %>
+                <% else %>
+                   <span id="absent"> Absent <span>
+                <% end %>
+            </td>
+          <% end %>  
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot class="tfoot-dark">
+      <tr class="bordered">
+        <td>Passing students</td>
+        <% @exams.each do |exam| %>
+              <td><%= exam.find_passing %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>Students who failed</td>
+        <% @exams.each do |exam| %>
+            <td><%= exam.find_total_attended - exam.find_passing %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>Absent students</td>
+        <% @exams.each do |exam| %>
+              <td><%= @course.students.size - exam.find_total_attended %></td>
+        <% end %>
+      </tr>
+      <tr class="bordered">
+      <td>Aproval percentage</td>
+      <% @exams.each do |exam| %>
+            <td>
+              <% if  exam.find_total_attended == 0 %>
+                 0
+              <% else %>
+                <%=  (exam.find_passing.to_f / exam.find_total_attended).round(2) * 100 %> 
+              <% end %> %
+            </td>
+      <% end %>
+    </tr>
+    </tfoot>
+  </table>
+
+  <br>      
+  <%= link_to 'Back to Courses', courses_path, class: 'btn btn-outline-dark' %>
+
+</div>

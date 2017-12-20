@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  surname: Onofri
+  name: Camila
+  number: 137356
+  dni: 39599149
+  email: onofricamila2@gmail.com
+
+two:
+  course: two
+  surname: Borrelli
+  name: Franco
+  number: 135968
+  dni: 39866987
+  email: borrellif@gmail.com
