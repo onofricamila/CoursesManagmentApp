@@ -8,10 +8,6 @@ class ExamTest < ActiveSupport::TestCase
       @exam = exams(:one)
     end
   
-    test "should be valid" do
-      assert @exam.valid?
-    end
-  
     test "should not save exam without title" do
       @exam.title = nil
       assert_not @exam.save
@@ -20,6 +16,16 @@ class ExamTest < ActiveSupport::TestCase
     test "should not save exam without date" do
       @exam.date = nil
       assert_not @exam.save
+    end
+
+    test "should not save exam with invalid date's year" do
+      @exam.date = '2015-12-25'
+      assert_not @exam.save
+    end
+
+    test "should save exam with date's year greater than course's year by 1" do
+      @exam.date = '2018-12-25'
+      assert @exam.save
     end
 
     test "should not save exam without passing_score" do
@@ -50,9 +56,17 @@ class ExamTest < ActiveSupport::TestCase
       assert exam.valid?
     end
 
-    # ---------------------------------------------------------------------------------------------------------------------------------
-    # testing interactions with other models
-    # ---------------------------------------------------------------------------------------------------------------------------------
+    test 'should not destroy exam if it has results related' do
+      assert_not @exam.destroy
+    end
+
+    test 'should destroy exam if it has not results related' do
+      assert exams(:three).destroy
+    end
+
+  # ---------------------------------------------------------------------------------------------------------------------------------
+  # testing interactions with other models
+  # ---------------------------------------------------------------------------------------------------------------------------------
 
     test "should recognize there is a student who attended to exam one" do
       # fixtures fold has a result which belongs to student one and exam one, which

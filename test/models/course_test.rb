@@ -6,18 +6,9 @@ class CourseTest < ActiveSupport::TestCase
     @course = courses(:one)
   end
 
-  test "should be valid" do
-    assert @course.valid?
-  end
-
   test "should not save course without a year" do
     @course.year = nil
     assert_not @course.save
-  end
-
-  test "year should not be too old" do
-    @course.year = 1800
-    assert_not @course.valid?
   end
 
   test "should not save course with a year < 1990" do
@@ -29,5 +20,13 @@ class CourseTest < ActiveSupport::TestCase
     duplicate_course = @course.dup
     @course.save!
     assert_not duplicate_course.valid?
+  end
+
+  test 'should not destroy course if it has students/exams related' do
+    assert_not @course.destroy
+  end
+
+  test 'should destroy course if it has not students/exams related' do
+    assert courses(:three).destroy
   end
 end

@@ -6,10 +6,6 @@ class StudentTest < ActiveSupport::TestCase
     @student = students(:one)
   end
 
-  test "should be valid" do
-    assert @student.valid?
-  end
-
   test "should not save student without a surname" do
     @student.surname = nil
     assert_not @student.save
@@ -42,6 +38,16 @@ class StudentTest < ActiveSupport::TestCase
 
   test "dni should be a number" do
     @student.dni = 'lala'
+    assert_not @student.valid?
+  end
+
+  test "dni should not have less than 7 digits" do
+    @student.dni = 123456
+    assert_not @student.valid?
+  end
+
+  test "dni should not have more than 8 digits" do
+    @student.dni = 123456789
     assert_not @student.valid?
   end
 
