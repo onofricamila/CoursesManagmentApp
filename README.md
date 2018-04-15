@@ -1,5 +1,9 @@
 # TTPS-Ruby Final Project
 
+App created so as to being able to manage all the courses from an especific signature, with their respective exams, projects, students, and the marks obtained by theese students in every examination, also showing a chart with aproval average per exam and per year.
+
+To see the full track of commits to build this app, do not hesitate to visit [here](https://github.com/onofricamila/TTPS-Ruby/tree/master/trabajo/app-trabajo), the real repository where this app was created.
+
 ## :pushpin: First of all, how do I run this app?
 
 1. Make sure you have `Ruby` installed in your computer, since this app was made using ruby 2.4.1p111. The gem called `bundler` is also required. You can install it by running `gem install bundler`
